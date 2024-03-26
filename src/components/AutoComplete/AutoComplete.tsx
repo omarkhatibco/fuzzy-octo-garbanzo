@@ -1,20 +1,16 @@
 import { FC, useCallback, useDeferredValue, useState } from 'react'
 
-import { useMovies } from '@/hooks'
-
 import { AutoCompleteContainer } from './AutoCompleteContainer'
 import { AutoCompleteInput } from './AutoCompleteInput'
+import { AutoCompleteResult } from './AutoCompleteResult'
 
 export const AutoComplete: FC = () => {
   const [value, setValue] = useState('')
   const deferredSearch = useDeferredValue(value)
-  const { data, isLoading } = useMovies(deferredSearch)
 
   const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
   }, [])
-
-  console.log(data, isLoading)
 
   return (
     <AutoCompleteContainer>
@@ -24,6 +20,7 @@ export const AutoComplete: FC = () => {
         onChange={onChange}
         placeholder='Search for a Star Wars...'
       />
+      <AutoCompleteResult searchValue={deferredSearch} />
     </AutoCompleteContainer>
   )
 }

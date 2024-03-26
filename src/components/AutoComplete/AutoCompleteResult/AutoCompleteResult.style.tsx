@@ -1,14 +1,16 @@
 import { cva } from '#/css'
 import { styled } from '#/jsx'
 
-export const autoCompleteInputStyle = cva({
+export const autoCompleteResultStyle = cva({
   base: {
+    position: 'absolute',
+    top: '100%',
+    zIndex: 1,
+    width: 'full',
+    mt: 4,
     p: 4,
     order: 1,
-    height: 14,
-    width: 'full',
-    appearance: 'none',
-    backgroundColor: 'gray.100',
+    backgroundColor: 'gray.50',
     color: 'gray.900',
     outline: 'none',
     transition: 'all',
@@ -21,4 +23,4 @@ export const autoCompleteInputStyle = cva({
   },
 })
 
-export const AutoCompleteInput = styled('input', autoCompleteInputStyle)
+export const Wrapper = styled('ul', autoCompleteResultStyle)
