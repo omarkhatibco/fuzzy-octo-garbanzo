@@ -11,6 +11,10 @@ export const autoCompleteResultItemStyle = cva({
     _hover: {
       backgroundColor: 'gray.200',
     },
+
+    '&:focus': {
+      backgroundColor: 'gray.200',
+    },
   },
 })
 

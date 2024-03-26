@@ -8,6 +8,7 @@ import { AutoCompleteResultItem } from './AutoCompleteResultItem'
 
 export type AutoCompleteResultProps = {
   searchValue: string
+  isOpen?: boolean
 }
 
 export const AutoCompleteResult: FC<AutoCompleteResultProps> = ({ searchValue }) => {
@@ -15,8 +16,12 @@ export const AutoCompleteResult: FC<AutoCompleteResultProps> = ({ searchValue })
 
   const { results: movies } = data || {}
 
+  if ((searchValue === '' && !isLoading) || searchValue.length < 2) {
+    return null
+  }
+
   return (
-    <Wrapper>
+    <Wrapper role='listbox'>
       {!isLoading &&
         Array.isArray(movies) &&
         movies.map(movie => (
@@ -32,6 +37,14 @@ export const AutoCompleteResult: FC<AutoCompleteResultProps> = ({ searchValue })
           p={4}
         >
           Loading...
+        </styled.div>
+      )}
+      {!isLoading && Array.isArray(movies) && movies.length === 0 && (
+        <styled.div
+          fontSize={'xl'}
+          p={4}
+        >
+          No Results
         </styled.div>
       )}
     </Wrapper>
