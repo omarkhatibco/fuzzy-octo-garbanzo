@@ -8,7 +8,7 @@ export const autoCompleteResultStyle = cva({
     zIndex: 1,
     width: 'full',
     mt: 4,
-    p: 4,
+    py: 2,
     order: 1,
     backgroundColor: 'gray.50',
     color: 'gray.900',

@@ -19,7 +19,6 @@ export const AutoCompleteResult: FC<AutoCompleteResultProps> = ({ searchValue })
       {movies.map(movie => (
         <AutoCompleteResultItem
           key={movie.episode_id}
-          searchValue={searchValue}
           {...movie}
         />
       ))}

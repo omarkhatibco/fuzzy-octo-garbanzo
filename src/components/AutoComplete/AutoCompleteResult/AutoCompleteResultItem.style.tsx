@@ -3,23 +3,14 @@ import { styled } from '#/jsx'
 
 export const autoCompleteResultItemStyle = cva({
   base: {
-    position: 'absolute',
-    top: '100%',
-    zIndex: 1,
-    width: 'full',
-    mt: 4,
     p: 4,
-    order: 1,
-    backgroundColor: 'gray.50',
-    color: 'gray.900',
-    outline: 'none',
-    transition: 'all',
-    _placeholder: {
-      color: 'gray.500',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+
+    _hover: {
+      backgroundColor: 'gray.200',
     },
-    borderColor: 'gray.200',
-    borderWidth: 1,
-    rounded: 'md',
   },
 })
 
