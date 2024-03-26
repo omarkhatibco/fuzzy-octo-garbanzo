@@ -19,6 +19,7 @@ export default function Page() {
       <Container
         py={8}
         w='full'
+        maxW='breakpoint-md'
       >
         <AutoComplete />
       </Container>

@@ -1,20 +1,28 @@
-import { FC, useCallback, useState } from 'react'
+import { FC, useCallback, useDeferredValue, useState } from 'react'
 
-import { AutoCompleteInput } from './AutoComplete.style'
+import { useMovies } from '@/hooks'
+
+import { AutoCompleteContainer, AutoCompleteInput } from './AutoComplete.style'
 
 export const AutoComplete: FC = () => {
   const [value, setValue] = useState('')
+  const deferredSearch = useDeferredValue(value)
+  const { data, isLoading } = useMovies(deferredSearch)
 
   const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
   }, [])
 
+  console.log(data, isLoading)
+
   return (
-    <AutoCompleteInput
-      type='text'
-      value={value}
-      onChange={onChange}
-      placeholder='Search for a Star Wars...'
-    />
+    <AutoCompleteContainer>
+      <AutoCompleteInput
+        type='text'
+        value={value}
+        onChange={onChange}
+        placeholder='Search for a Star Wars...'
+      />
+    </AutoCompleteContainer>
   )
 }
