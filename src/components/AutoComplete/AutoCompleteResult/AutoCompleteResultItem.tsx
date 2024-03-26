@@ -6,7 +6,10 @@ import { Movie } from '@/types'
 
 import { Wrapper } from './AutoCompleteResultItem.style'
 
-export type AutoCompleteResultItemProps = Movie & {
+export type AutoCompleteResultItemProps = Pick<
+  Movie,
+  'episode_id' | 'title' | 'director' | 'release_date'
+> & {
   searchValue: string
 }
 
@@ -43,6 +46,7 @@ export const AutoCompleteResultItem: FC<AutoCompleteResultItemProps> = ({
       <Center p={8}>
         <VStack alignItems={'flex-start'}>
           <styled.h2
+            data-testid='title'
             fontWeight={'bold'}
             css={{
               '& code': {
