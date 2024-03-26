@@ -2,7 +2,8 @@ import { FC, useCallback, useDeferredValue, useState } from 'react'
 
 import { useMovies } from '@/hooks'
 
-import { AutoCompleteContainer, AutoCompleteInput } from './AutoComplete.style'
+import { AutoCompleteContainer } from './AutoCompleteContainer'
+import { AutoCompleteInput } from './AutoCompleteInput'
 
 export const AutoComplete: FC = () => {
   const [value, setValue] = useState('')

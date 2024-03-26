@@ -10,7 +10,7 @@ export const useMovies = (search: string) => {
   const query = useQuery({
     queryKey: ['films', search],
     queryFn: () => fetchMovies(search),
-    enabled: search !== '',
+    enabled: search !== '' && search.length > 1,
   })
 
   return query
