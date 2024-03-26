@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { styled } from '#/jsx'
 
 import { useMovies } from '@/hooks'
 
@@ -12,17 +13,27 @@ export type AutoCompleteResultProps = {
 export const AutoCompleteResult: FC<AutoCompleteResultProps> = ({ searchValue }) => {
   const { data, isLoading } = useMovies(searchValue)
 
-  const { results: movies } = data ?? { results: [] }
+  const { results: movies } = data || {}
 
   return (
     <Wrapper>
-      {movies.map(movie => (
-        <AutoCompleteResultItem
-          key={movie.episode_id}
-          searchValue={searchValue}
-          {...movie}
-        />
-      ))}
+      {!isLoading &&
+        Array.isArray(movies) &&
+        movies.map(movie => (
+          <AutoCompleteResultItem
+            key={movie.episode_id}
+            searchValue={searchValue}
+            {...movie}
+          />
+        ))}
+      {isLoading && (
+        <styled.div
+          fontSize={'xl'}
+          p={4}
+        >
+          Loading...
+        </styled.div>
+      )}
     </Wrapper>
   )
 }
