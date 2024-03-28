@@ -6,7 +6,13 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import './globals.css'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 60, // 5 minutes
+    },
+  },
+})
 
 const inter = Inter({ subsets: ['latin'] })
 
