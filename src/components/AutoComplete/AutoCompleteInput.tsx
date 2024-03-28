@@ -1,5 +1,9 @@
+import { useCallback } from 'react'
 import { cva } from '#/css'
 import { styled } from '#/jsx'
+import { useAtom } from 'jotai'
+
+import { searchAtom } from './AutoComplete.state'
 
 export const autoCompleteInputStyle = cva({
   base: {
@@ -21,4 +25,24 @@ export const autoCompleteInputStyle = cva({
   },
 })
 
-export const AutoCompleteInput = styled('input', autoCompleteInputStyle)
+export const Input = styled('input', autoCompleteInputStyle)
+
+export const AutoCompleteInput = () => {
+  const [value, setValue] = useAtom(searchAtom)
+
+  const onChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(e.target.value)
+    },
+    [setValue],
+  )
+
+  return (
+    <Input
+      type='text'
+      value={value}
+      onChange={onChange}
+      placeholder='Search for a Star Wars...'
+    />
+  )
+}

@@ -1,22 +1,26 @@
-import { FC } from 'react'
+import { FC, useDeferredValue } from 'react'
 import { styled } from '#/jsx'
+import { useAtomValue } from 'jotai'
 
 import { useMovies } from '@/hooks'
 
+import { searchAtom } from '../AutoComplete.state'
 import { Wrapper } from './AutoCompleteResult.style'
 import { AutoCompleteResultItem } from './AutoCompleteResultItem'
 
 export type AutoCompleteResultProps = {
-  searchValue: string
   isOpen?: boolean
 }
 
-export const AutoCompleteResult: FC<AutoCompleteResultProps> = ({ searchValue }) => {
+export const AutoCompleteResult: FC<AutoCompleteResultProps> = () => {
+  const searchValue = useAtomValue(searchAtom)
+  const deferredSearch = useDeferredValue(searchValue)
+
   const { data, isLoading } = useMovies(searchValue)
 
   const { results: movies } = data || {}
 
-  if ((searchValue === '' && !isLoading) || searchValue.length < 2) {
+  if ((deferredSearch === '' && !isLoading) || deferredSearch.length < 2) {
     return null
   }
 
@@ -27,7 +31,7 @@ export const AutoCompleteResult: FC<AutoCompleteResultProps> = ({ searchValue })
         movies.map(movie => (
           <AutoCompleteResultItem
             key={movie.episode_id}
-            searchValue={searchValue}
+            searchValue={deferredSearch}
             {...movie}
           />
         ))}
